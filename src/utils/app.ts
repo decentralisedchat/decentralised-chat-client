@@ -4,7 +4,7 @@ export const getParentWindow = () => window.parent;
 
 export const getAppId = () => {
   const appId = getParentWindow().decenChat?.appId;
-  if(appId.startsWith('npub')) {
+  if(appId && appId.startsWith('npub')) {
     return npubToHex(appId);
   }
   return appId;

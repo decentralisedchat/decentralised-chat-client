@@ -15,7 +15,8 @@ function App() {
       const appConfig = await fetchProfiles([appId]);
       updateAppConfig(appConfig[appId]);
     };
-    setTimeout(fetchAppConfig, 100);
+
+    setTimeout(fetchAppConfig);
   }, []);
 
   if (!appConfig) return null;
@@ -26,11 +27,11 @@ function App() {
     ) as HTMLIFrameElement;
     if (iframe) {
       if (!isChatOpen) {
-        iframe.style.width = "374px";
-        iframe.style.height = "524px";
+        iframe.style.width = "350px";
+        iframe.style.height = "500px";
       } else {
-        iframe.style.width = "96px";
-        iframe.style.height = "96px";
+        iframe.style.width = "72px";
+        iframe.style.height = "72px";
       }
     }
     setIsChatOpen((pre) => !pre);
