@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { fetchProfiles } from "../../utils/nostr";
 import ChatIcon from "../ChatIcon";
 import ChatWindow from "../ChatWindow";
-import { getAppId } from "../../utils/app";
+import { getAppId, getParentWindow } from "../../utils/app";
 import "./style.css";
 
 function App() {
@@ -20,18 +20,31 @@ function App() {
 
   if (!appConfig) return null;
 
-  const handleChatIconClick = () => {
-    setIsChatOpen(true);
-  };
-
-  const handleChatClose = () => {
-    setIsChatOpen(false);
+  const toggleChatWindow = () => {
+    const iframe = getParentWindow().document.getElementById(
+      "decentralised-chat"
+    ) as HTMLIFrameElement;
+    if (iframe) {
+      if (!isChatOpen) {
+        iframe.style.width = "374px";
+        iframe.style.height = "524px";
+      } else {
+        iframe.style.width = "96px";
+        iframe.style.height = "96px";
+      }
+    }
+    setIsChatOpen((pre) => !pre);
   };
 
   return (
     <div className="App">
-      <ChatIcon onClick={handleChatIconClick} className={isChatOpen ? 'hidden' : ''} />
-      {isChatOpen && <ChatWindow appConfig={appConfig} onClose={handleChatClose} />}
+      <ChatIcon
+        onClick={toggleChatWindow}
+        className={isChatOpen ? "hidden" : ""}
+      />
+      {isChatOpen && (
+        <ChatWindow appConfig={appConfig} onClose={toggleChatWindow} />
+      )}
     </div>
   );
 }
