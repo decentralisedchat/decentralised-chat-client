@@ -8,11 +8,13 @@
   i.style.width = '96px';
   i.style.height = '96px';
   i.style.border = 'none';
+  i.style.backgroundColor = 'transparent';
   i.style.zIndex = '1000';
   i.style.transition = 'width 0.3s ease-in-out, height 0.3s ease-in-out';  // Smooth transition for resizing
   d.body.appendChild(i);
 
-  i.contentWindow.document.open("text/html", "replace");
+  var iframeDocument = i.contentDocument || i.contentWindow.document;
+  iframeDocument.open();
   i.contentWindow.document.write(`__WIDGET_HTML__`);
-  i.contentWindow.document.close();
+  iframeDocument.close();
 })();

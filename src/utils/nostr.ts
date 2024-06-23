@@ -159,9 +159,7 @@ export async function fetchProfiles(pubkeys: Array<string>) {
     if (nprofileNpubMap[p]) {
       pub = nprofileNpubMap[p];
     }
-    acc[p] = kind0sMap[pub] || {
-      name: `Anonymous`,
-    };
+    acc[p] = kind0sMap[pub];
     return acc;
   }, {});
   return profiles;
@@ -271,4 +269,14 @@ export const sendMessage = async (msg: string, appId: string) => {
   const pool = getPool();
   await pool.publish(defaultRelays, kind4Event);
   return kind4Event;
+};
+
+export const npubToHex = (npub: string) => {
+  try {
+    const hexNpub = nip19.decode(npub).data.toString();
+    return hexNpub;
+  } catch (e) {
+    console.log("Error: ", e);
+    return npub;
+  }
 };
