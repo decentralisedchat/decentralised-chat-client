@@ -27,11 +27,11 @@ function App() {
     ) as HTMLIFrameElement;
     if (iframe) {
       if (!isChatOpen) {
-        iframe.style.width = "350px";
-        iframe.style.height = "500px";
+        iframe.style.width = "374px";
+        iframe.style.height = "524px";
       } else {
-        iframe.style.width = "72px";
-        iframe.style.height = "72px";
+        iframe.style.width = "96px";
+        iframe.style.height = "96px";
       }
     }
     setIsChatOpen((pre) => !pre);
